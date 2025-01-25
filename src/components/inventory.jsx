@@ -8,6 +8,7 @@ const Inventory = ({ inventory, title, categories }) => {
   const [inventoryState, dispatch] = useReducer(inventoryReducer, {
     inventory,
     filteredInventory: inventory,
+    sortBy: "",
   });
   const [formData, setFormData] = useState({
     id: null,
@@ -106,10 +107,14 @@ const Inventory = ({ inventory, title, categories }) => {
         </button>
       </form>
       <div>
-        <div>
-        Category filter{" "}
-        </div>
-        <select name="categoryFilter" id="categoryFilter" onChange={(e)=>dispatch({type:"Category",payload:e.target.value})}>
+        <div>Category filter </div>
+        <select
+          name="categoryFilter"
+          id="categoryFilter"
+          onChange={(e) =>
+            dispatch({ type: "Category", payload: e.target.value })
+          }
+        >
           <option name="0" id="0" value="none">
             All categories
           </option>
@@ -121,33 +126,43 @@ const Inventory = ({ inventory, title, categories }) => {
         </select>
       </div>
       <div className={`${invetoryCSS.table} ${invetoryCSS.header}`}>
-            <span>Qty.</span>
-            <span>Price</span>
-            <span>Name</span>
-            <span>Category</span>
-          </div>
-        {inventoryState.filteredInventory.map((item) => (
-          <div key={item.id} className={invetoryCSS.table} style={{backgroundColor:item.quantity<10?"red":""}}>
-            <span>{item.quantity}</span>
-            <span>{item.price}</span>
-            <span>{item.name}</span>
-            <span>{item.category}</span>
-            <button
-              onClick={() => {
-                dispatch({ type: "Delete", payload: item.id });
-              }}
-            >
-              Delete
-            </button>
-            <button
-              onClick={() => {
-                handleEdit(item);
-              }}
-            >
-              Edit
-            </button>
-          </div>
-        ))}
+        <span
+          onClick={() => {
+            dispatch({ type: "SortBy" });
+          }}
+        >
+          Qty.
+        </span>
+        <span>Price</span>
+        <span>Name</span>
+        <span>Category</span>
+      </div>
+      {inventoryState.filteredInventory.map((item) => (
+        <div
+          key={item.id}
+          className={invetoryCSS.table}
+          style={{ backgroundColor: item.quantity < 10 ? "red" : "" }}
+        >
+          <span>{item.quantity}</span>
+          <span>{item.price}</span>
+          <span>{item.name}</span>
+          <span>{item.category}</span>
+          <button
+            onClick={() => {
+              dispatch({ type: "Delete", payload: item.id });
+            }}
+          >
+            Delete
+          </button>
+          <button
+            onClick={() => {
+              handleEdit(item);
+            }}
+          >
+            Edit
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
