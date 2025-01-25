@@ -1,4 +1,4 @@
-const invertory = [
+const inventory = [
   {
     id: 1,
     name: "Notebook",
@@ -141,4 +141,5 @@ const invertory = [
   },
 ];
 
-export {invertory};
+const categories=['Stationery', 'Electronics', 'Kitchenware', 'Furniture', 'Accessories', 'Clothing', 'Lighting', 'Footwear', 'Home Decor']
+export {inventory,categories};

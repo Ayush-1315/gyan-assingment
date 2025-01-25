@@ -1,12 +1,11 @@
 import "./App.css";
 import Inventory from "./components/inventory";
-import { invertory } from "./database/data";
+import { inventory,categories } from "./database/data";
 
 function App() {
-  console.log(invertory);
   return (
     <>
-      <Inventory invertory={invertory} title={"Items Inventory"}/>
+      <Inventory inventory={inventory} title={"Items Inventory"} categories={categories}/>
     </>
   );
 }
